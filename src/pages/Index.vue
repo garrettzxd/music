@@ -1,79 +1,87 @@
 <template>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>地区</th>
-                    <th>名字</th>
-                    <th>图片</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in table_data" :key="item.singer_mid">
-                    <td>{{item.country || '未知'}}</td>
-                    <td>{{item.singer_name || '未知'}}</td>
-                    <td>
-                        <img style="width: 100px;height: 100px" :src="item.singer_pic"/>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div style="background: #ccc;">
+        <el-button type="primary" @click="req">获取</el-button>
+        <img src="../assets/classification.png"/>
     </div>
 </template>
 
 <script>
+    import axios from "../common/axios";
+
+    const BASE_URL = 'https://u.y.qq.com/cgi-bin/musicu.fcg?';
+    const BASE_DATA = {
+        callback: '',
+        g_tk: 5381,
+        jsonpCallback: '',
+        loginUin: 0,
+        hostUin: 0,
+        format: 'jsonp',
+        inCharset: 'utf8',
+        outCharset: 'utf-8',
+        notice: 0,
+        platform: 'yqq',
+        needNewCode: 0,
+        data: ''
+    }
     import url from '../common/url'
-    import axios from '../common/axios'
     export default {
         name: "Index",
 
-        mounted() {
-            // this.getTableData();
-            this.getData();
-        },
+        mounted() {},
 
         data() {
             return {
                 table_data: [],
-                key: '0404f628c12b465faaf860bd9454a023',
-                url: 'https://free-api.heweather.com/s6/weather/now'
+                form: {
+                    area: '',
+                    gender: '',
+                    genre: ''
+                }
             }
         },
 
         methods: {
-            getTableData() {
-                // this.axios(`${this.url}?location=hangzhou&key=${this.key}`).then((res) => {
-                //     console.log(res.data);
-                // }).catch((err) => {
-                //     console.log(err);
-                // })
-            },
-
-            getData() {
+            req() {
+                let url = this.getSinger({
+                    pageNumber: 1
+                });
                 axios({
-                    url: url.getSingerList,
-                    params: {
-                        testParam: 'nothingSay!'
-                    }
-                })
-                .then((res) => {
+                    url
+                }).then((res) => {
                     console.log(res.data);
+                }).catch((err) => {
+                    console.error('occur error', err);
                 })
-                .catch((err) => {
-                    console.log(err);
-                })
-                // axios(url.getSingerList, {
-                //     params: {
-                //         testParam: 'nothingSay!'
-                //     }
-                // }).then((res) => {
-                //     this.table_data = res.data;
-                //     for (let item of this.table_data) {
-                //         item.singer_pic = item.singer_pic.replace(/.webp/,'.jpg');
-                //     }
-                // }).catch((err) => {
-                //     console.log(err);
-                // })
+            },
+            getSinger({pageNumber, sex = -100, genre = -100}) {
+                let result_url = BASE_URL;
+                let son_data = {
+                    "comm":{
+                        "ct":24,
+                        "cv":10000
+                    },
+                    "singerList":{
+                        "module":"Music.SingerListServer",
+                        "method":"get_singer_list",
+                        "param":{
+                            "area": -100,
+                            "sex": sex,
+                            "genre": genre,
+                            "index": -100,
+                            "sin": (pageNumber - 1)*80,
+                            "cur_page": pageNumber
+                        }
+                    }
+                };
+                let name = "getUCGI" + (Math.random() + "").replace("0.", "");
+                BASE_DATA.callback = name;
+                BASE_DATA.jsonpCallback = name;
+                BASE_DATA.data = encodeURIComponent(JSON.stringify(son_data));
+
+                for(let key in BASE_DATA) {
+                    result_url = result_url + `${key}=${BASE_DATA[key]}&`;
+                }
+                return result_url
             }
         }
     }
