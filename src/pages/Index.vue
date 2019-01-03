@@ -1,92 +1,104 @@
 <template>
-    <div style="background: #ccc;">
-        <el-button type="primary" @click="req">获取</el-button>
-        <img src="../assets/classification.png"/>
+    <div class="index-con">
+        <div class="index-top">
+            <div class="tabs">
+                <span
+                    @click="changeTab('personal')"
+                    :class="{active: tab_data === 'personal'}">
+                    我的
+                </span>
+                <span
+                    @click="changeTab('musicHall')"
+                    class="tabs-main"
+                    :class="{active: tab_data === 'musicHall'}">
+                    音乐馆
+                </span>
+                <span
+                    @click="changeTab('discovery')"
+                    :class="{active: tab_data === 'discovery'}">
+                    发现
+                </span>
+            </div>
+            <p class="search-btn">
+                <img class="search-img" src="http://music-garrett.oss-cn-hangzhou.aliyuncs.com/Common-icom/search.png"/>
+                <span class="search-text">搜索</span>
+            </p>
+        </div>
+
+        <keep-alive>
+            <component :is="tab_data"></component>
+        </keep-alive>
     </div>
 </template>
 
 <script>
     import axios from "../common/axios";
-
-    const BASE_URL = 'https://u.y.qq.com/cgi-bin/musicu.fcg?';
-    const BASE_DATA = {
-        callback: '',
-        g_tk: 5381,
-        jsonpCallback: '',
-        loginUin: 0,
-        hostUin: 0,
-        format: 'jsonp',
-        inCharset: 'utf8',
-        outCharset: 'utf-8',
-        notice: 0,
-        platform: 'yqq',
-        needNewCode: 0,
-        data: ''
-    }
     import url from '../common/url'
+    import personal from './Personal'
+    import musicHall from './MusicHall'
+    import discovery from './Discovery'
     export default {
         name: "Index",
 
         mounted() {},
 
+        components: {
+            personal,
+            musicHall,
+            discovery
+        },
+
         data() {
             return {
-                table_data: [],
-                form: {
-                    area: '',
-                    gender: '',
-                    genre: ''
-                }
+                tab_data: 'musicHall'
             }
         },
 
         methods: {
-            req() {
-                let url = this.getSinger({
-                    pageNumber: 1
-                });
-                axios({
-                    url
-                }).then((res) => {
-                    console.log(res.data);
-                }).catch((err) => {
-                    console.error('occur error', err);
-                })
-            },
-            getSinger({pageNumber, sex = -100, genre = -100}) {
-                let result_url = BASE_URL;
-                let son_data = {
-                    "comm":{
-                        "ct":24,
-                        "cv":10000
-                    },
-                    "singerList":{
-                        "module":"Music.SingerListServer",
-                        "method":"get_singer_list",
-                        "param":{
-                            "area": -100,
-                            "sex": sex,
-                            "genre": genre,
-                            "index": -100,
-                            "sin": (pageNumber - 1)*80,
-                            "cur_page": pageNumber
-                        }
-                    }
-                };
-                let name = "getUCGI" + (Math.random() + "").replace("0.", "");
-                BASE_DATA.callback = name;
-                BASE_DATA.jsonpCallback = name;
-                BASE_DATA.data = encodeURIComponent(JSON.stringify(son_data));
-
-                for(let key in BASE_DATA) {
-                    result_url = result_url + `${key}=${BASE_DATA[key]}&`;
-                }
-                return result_url
+            changeTab(type) {
+                this.tab_data = type;
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .index-con{
+        font-size: 0.16rem;
+    }
+    .index-top{
+        height: 1.55rem;
+        background: #61bf82;
+    }
+    .search-btn{
+        width: 7.18rem;
+        height: 0.68rem;
+        line-height: 0.68rem;
+        margin-left: 0.16rem;
+        background: #55a872;
+        text-align: center;
+        color: #eaf7f0;
+    }
+    .search-text{
+        font-size: 0.3rem;
+    }
+    .search-img{
+        width: 0.32rem;
+        height: 0.32rem;
+    }
+    .tabs{
+        text-align: center;
+        color: #ffffff;
+        /*padding-top: 30px;*/
+        padding-bottom: 0.1rem;
+        font-size: 0.36rem;
+    }
+    .tabs-main{
+        font-size: 0.4rem;
+        display: inline-block;
+        padding: 0 0.2rem;
+    }
+    .active{
+        font-weight: bold;
+    }
 </style>
