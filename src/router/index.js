@@ -8,6 +8,10 @@ export default new Router({
         name: 'index',
         component: resolve => require(['../pages/Index'], resolve)
     },{
+        path: '/icon',
+        name: 'icon',
+        component: resolve => require(['../pages/Icon'], resolve)
+    },{
         path: '*',
         redirect: '/index'
     }]

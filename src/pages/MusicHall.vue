@@ -8,12 +8,25 @@
                 <p class="class-text">{{item.tips}}</p>
             </div>
         </div>
+
+        <div class="recommend">
+            <div class="personal-radio">个性电台</div>
+            <div class="new-rec">
+                <div class="new-song">新歌新碟</div>
+                <div class="new-album">数字专辑·票务</div>
+            </div>
+        </div>
+
+
+
+        <recommend-list title="新歌推荐"></recommend-list>
     </div>
 </template>
 
 <script>
     import {BASE_IMG_URL} from "../common/constans";
     import MuCarousel from '../components/MuCarousel'
+    import RecommendList from '../components/RecommendList'
     export default {
         name: "MusicHall",
 
@@ -22,7 +35,8 @@
         },
 
         components: {
-            MuCarousel
+            MuCarousel,
+            RecommendList
         },
 
         data() {
@@ -53,7 +67,8 @@
     .classification{
         height: 1.7rem;
         width: 7.2rem;
-        margin: auto;
+        margin-left: auto;
+        margin-right: auto;
         box-shadow: 0 0.01rem 0.05rem 0.01rem #cccccc;
     }
     .class-item{
@@ -63,5 +78,27 @@
     }
     .class-img{
 
+    }
+    .recommend{
+        width: 7.2rem;
+        margin: 0.4rem auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .personal-radio{
+        width: 2.5rem;
+        height: 2.5rem;
+        background: #002d44;
+    }
+    .new-rec{
+        display: flex;
+        flex-wrap: wrap;
+        width: 4.4rem;
+        /*align-content: space-between;*/
+    }
+    .new-song, .new-album{
+        width: 4.4rem;
+        height: 1.2rem;
+        background: #f5f5f5;
     }
 </style>
