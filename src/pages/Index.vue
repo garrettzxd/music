@@ -69,6 +69,8 @@
     .index-top{
         height: 1.55rem;
         background: #61bf82;
+        position: fixed;
+        width: 100%;
     }
     .search-btn{
         width: 7.18rem;
@@ -89,7 +91,6 @@
     .tabs{
         text-align: center;
         color: #ffffff;
-        /*padding-top: 30px;*/
         padding-bottom: 0.1rem;
         font-size: 0.36rem;
     }

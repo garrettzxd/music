@@ -6,6 +6,7 @@
             <!--class="iconfont"-->
             <!--:class="item">-->
         <!--</i>-->
+        <i class="iconfont">&#xe604</i>
         <table class="icon-table">
             <thead>
                 <tr>

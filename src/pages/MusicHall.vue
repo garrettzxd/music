@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="hall-content">
         <mu-carousel></mu-carousel>
 
         <div class="classification">
             <div class="class-item" v-for="item in classification_list">
-                <img class="class-img" :src="item.src"/>
+                <i :class="item.icon" class="iconfont classification-icon"></i>
                 <p class="class-text">{{item.tips}}</p>
             </div>
         </div>
@@ -16,8 +16,6 @@
                 <div class="new-album">数字专辑·票务</div>
             </div>
         </div>
-
-
 
         <recommend-list title="新歌推荐"></recommend-list>
     </div>
@@ -43,20 +41,23 @@
             return {
                 base_img_url: BASE_IMG_URL,
                 classification_list: [{
-                    src: `${BASE_IMG_URL}singer.png`,
+                    icon: 'icon-iconrenwu',
                     tips: '歌手'
                 },{
-                    src: `${BASE_IMG_URL}ranking.png`,
+                    icon: 'icon-paihang',
                     tips: '排行'
                 },{
-                    src: `${BASE_IMG_URL}classification.png`,
+                    icon: 'icon-leimupinleifenleileibie',
                     tips: '分类'
                 },{
-                    src: `${BASE_IMG_URL}radio.png`,
+                    icon: 'icon-ziyuan',
                     tips: '电台'
                 },{
-                    src: `${BASE_IMG_URL}mv.png`,
+                    icon: 'icon-shipin',
                     tips: '视频'
+                }],
+                carousel_list: [{
+                    img: 'url("http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1121987.jpg")'
                 }]
             }
         }
@@ -64,20 +65,29 @@
 </script>
 
 <style scoped>
+    .hall-content{
+        padding-top: 4.5rem;
+    }
     .classification{
         height: 1.7rem;
         width: 7.2rem;
         margin-left: auto;
         margin-right: auto;
         box-shadow: 0 0.01rem 0.05rem 0.01rem #cccccc;
+        display: flex;
+        align-items: center;
     }
     .class-item{
-        width: 1.44rem;
-        float: left;
+        height: 0.9rem;
+        flex-grow: 1;
         text-align: center;
     }
-    .class-img{
-
+    .classification-icon{
+        color: #61bf82;
+        font-size: 0.5rem;
+    }
+    .class-text{
+        font-size: 0.28rem;
     }
     .recommend{
         width: 7.2rem;
@@ -94,7 +104,6 @@
         display: flex;
         flex-wrap: wrap;
         width: 4.4rem;
-        /*align-content: space-between;*/
     }
     .new-song, .new-album{
         width: 4.4rem;
