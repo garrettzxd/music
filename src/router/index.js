@@ -12,6 +12,10 @@ export default new Router({
         name: 'icon',
         component: resolve => require(['../pages/Icon'], resolve)
     },{
+        path: '/test',
+        name: 'test',
+        component: resolve => require(['../pages/test'], resolve)
+    },{
         path: '*',
         redirect: '/index'
     }]
