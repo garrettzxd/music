@@ -6,25 +6,7 @@
         </div>
 
         <div class="list-item">
-            <show-list item-width="2.48rem">
-                <show-item text1="内容1">
-                    <template slot="top-left">
-                        <i class="iconfont icon-erji"></i>112
-                    </template>
-                </show-item>
-                <show-item text1="内容2"></show-item>
-                <show-item text1="内容3"></show-item>
-            </show-list>
-
-            <show-list item-width="2.48rem">
-                <show-item text1="内容4">
-                    <template slot="top-left">
-                        <i class="iconfont icon-erji"></i>112
-                    </template>
-                </show-item>
-                <show-item text1="内容5"></show-item>
-                <show-item text1="内容6"></show-item>
-            </show-list>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -54,7 +36,7 @@
 
 <style scoped>
     .list-content{
-
+        padding-bottom: 0.5rem;
     }
     .list-title{
         font-size: 0.35rem;

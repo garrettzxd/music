@@ -1,6 +1,13 @@
 <template>
     <div class="hall-content">
-        <mu-carousel></mu-carousel>
+        <mu-carousel>
+            <carousel-item>
+                <img class="c-img" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1121987.jpg"/>
+            </carousel-item>
+            <carousel-item>
+                <img class="c-img" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1122985.jpg"/>
+            </carousel-item>
+        </mu-carousel>
 
         <div class="classification">
             <div class="class-item" v-for="item in classification_list">
@@ -17,14 +24,39 @@
             </div>
         </div>
 
-        <recommend-list title="新歌推荐"></recommend-list>
+        <recommend-list title="新歌推荐">
+            <show-list>
+                <show-item text="内容1">
+                    <template slot="top-left">
+                        <i class="iconfont icon-erji"></i>112
+                    </template>
+                </show-item>
+                <show-item text="内容2"></show-item>
+                <show-item text="内容3"></show-item>
+                <show-item text="内容4"></show-item>
+                <show-item text="内容5"></show-item>
+                <show-item text="内容6"></show-item>
+            </show-list>
+        </recommend-list>
+
+        <recommend-list title="独家内容">
+            <show-list item-width="3.73rem" item-height="2.1rem">
+                <show-item text="内容1"></show-item>
+                <show-item text="内容2"></show-item>
+                <show-item text="内容3"></show-item>
+                <show-item text="内容4"></show-item>
+            </show-list>
+        </recommend-list>
     </div>
 </template>
 
 <script>
     import {BASE_IMG_URL} from "../common/constans";
-    import MuCarousel from '../components/MuCarousel'
+    import MuCarousel from '../components/carousel/MuCarousel'
+    import CarouselItem from '../components/carousel/CarouselItem'
     import RecommendList from '../components/RecommendList'
+    import ShowList from '../components/ShowList/ShowList'
+    import ShowItem from '../components/ShowList/ShowItem'
     export default {
         name: "MusicHall",
 
@@ -34,7 +66,10 @@
 
         components: {
             MuCarousel,
-            RecommendList
+            CarouselItem,
+            RecommendList,
+            ShowList,
+            ShowItem
         },
 
         data() {
@@ -65,8 +100,11 @@
 </script>
 
 <style scoped>
+    .c-img{
+        width: 100%;
+    }
     .hall-content{
-        padding-top: 4.5rem;
+        padding-top: 1.55rem;
     }
     .classification{
         height: 1.7rem;

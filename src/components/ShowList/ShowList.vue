@@ -17,7 +17,7 @@
         props: {
             itemWidth: {
                 type: String,
-                // default: '2.48rem'
+                default: '2.48rem'
             },
             itemHeight: {
                 type: String,
@@ -35,5 +35,7 @@
     .show-list{
         display: flex;
         margin-top: 0.3rem;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 </style>

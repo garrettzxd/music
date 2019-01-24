@@ -71,6 +71,7 @@
         background: #61bf82;
         position: fixed;
         width: 100%;
+        z-index: 999;
     }
     .search-btn{
         width: 7.18rem;

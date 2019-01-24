@@ -3,7 +3,7 @@
         <div
             @click="toDetail"
             class="show-item-img"
-            :style="{height: height, with: width}">
+            :style="{height: height, width: width}">
 
             <div class="top-left">
                 <slot name="top-left"></slot>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <p>{{text1}}</p>
+        <p class="show-text">{{text}}</p>
     </div>
 </template>
 
@@ -39,7 +39,7 @@
         inject: ['showList'],
 
         props: {
-            text1: {
+            text: {
                 type: String
             }
         },
@@ -68,10 +68,11 @@
 
 <style scoped>
     .show-item{
-        flex-grow: 1;
+        /*flex-grow: 1;*/
+        padding-bottom: 0.3rem;
     }
     .show-item:not(:last-child) {
-        margin-right: 0.05rem;
+        /*margin-right: 0.05rem;*/
     }
     .show-item-img{
         background: #cccccc;
@@ -90,5 +91,8 @@
     .bottom-left, .bottom-right{
         position: absolute;
         bottom: 0.05rem;
+    }
+    .show-text{
+        padding: 0 0.1rem;
     }
 </style>
