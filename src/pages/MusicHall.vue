@@ -24,7 +24,22 @@
             </div>
         </div>
 
-        <recommend-list title="新歌推荐">
+        <recommend-list title="为你推荐歌单">
+            <show-list>
+                <show-item text="内容1">
+                    <template slot="top-left">
+                        <i class="iconfont icon-erji"></i>112
+                    </template>
+                </show-item>
+                <show-item text="内容2"></show-item>
+                <show-item text="内容3"></show-item>
+                <show-item text="内容4"></show-item>
+                <show-item text="内容5"></show-item>
+                <show-item text="内容6"></show-item>
+            </show-list>
+        </recommend-list>
+
+        <recommend-list title="最新专辑">
             <show-list>
                 <show-item text="内容1">
                     <template slot="top-left">
@@ -47,6 +62,7 @@
                 <show-item text="内容4"></show-item>
             </show-list>
         </recommend-list>
+
     </div>
 </template>
 

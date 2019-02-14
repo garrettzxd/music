@@ -6,7 +6,11 @@ export default new Router({
     routes: [{
         path: '/index',
         name: 'index',
-        component: resolve => require(['../pages/Index'], resolve)
+        component: resolve => require(['../pages/Index'], resolve),
+    },{
+        path: '/singer',
+        name: 'singer',
+        component: resolve => require(['../pages/singer/SingerList'], resolve)
     },{
         path: '/icon',
         name: 'icon',
