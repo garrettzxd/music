@@ -31,6 +31,7 @@
         font-size: 0.3rem;
         display: flex;
         justify-content: space-between;
-        padding: 0 0.1rem;
+        padding: 0 0.2rem;
+        box-sizing: border-box;
     }
 </style>
